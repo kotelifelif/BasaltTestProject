@@ -6,11 +6,12 @@ cmake_minimum_required (VERSION 3.8)
 project ("BasaltTestProject")
 
 # Add source to this project's executable.
-add_executable (BasaltTestProject "main.cpp")
+add_executable (BasaltTestProject "main.cpp" "Request.h")
 add_subdirectory(cpr)
+add_subdirectory(json)
 include_directories(${CPR_INCLUDE_DIRS})
-target_link_libraries(BasaltTestProject ${CPR_LIBRARIES})
-
+target_link_libraries(BasaltTestProject PRIVATE cpr::cpr nlohmann_json::nlohmann_json)
+#target_link_libraries(BasaltTestProject PRIVATE nlohmann_json::nlohmann_json)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET BasaltTestProject PROPERTY CXX_STANDARD 20)
