@@ -1,3 +1,4 @@
+#pragma once
 #include <nlohmann/json.hpp>
 
 #include <string>
@@ -6,6 +7,20 @@
 using json = nlohmann::json;
 
 namespace get_request {
+      
+    struct BranchRequest {
+        std::vector<std::string> branches;
+    };
+
+    struct Arch {
+        size_t count;
+        std::string arch;
+    };
+
+    struct ArchRequest {
+        std::vector<Arch> archs;
+    };
+    
     struct Package {
         std::string name;
         int64_t epoch;
@@ -15,6 +30,19 @@ namespace get_request {
         std::string disttag;
         int64_t buildtime;
         std::string source;
+
+        bool operator == (const Package& package) const {
+            return name == package.name && epoch == package.epoch &&
+                version == package.version && release == package.release &&
+                arch == package.arch && disttag == package.disttag &&
+                buildtime == package.buildtime && source == package.source;
+        }
+
+        struct PackageHash {
+            std::size_t operator()(const Package& package) const {
+                return std::hash<std::string>()(package.name);
+            }
+        };
     };
 
     struct RequestArgs {
@@ -26,6 +54,35 @@ namespace get_request {
         int64_t length;
         std::vector<Package> packages;
     };
+
+    inline void from_json(const json& json_text, Arch& request) {
+        request.count = json_text.at("count").get<size_t>();
+        request.arch = json_text.at("arch").get<std::string>();
+    }
+
+    inline void to_json(json& json_text, const Arch& request) {
+        json_text = json::object();
+        json_text["count"] = request.count;
+        json_text["arch"] = request.arch;
+    }
+
+    inline void from_json(const json& json_text, ArchRequest& request) {
+        request.archs = json_text.at("archs").get<std::vector<Arch>>();
+    }
+
+    inline void to_json(json& json_text, const ArchRequest& request) {
+        json_text = json::object();
+        json_text["archs"] = request.archs;
+    }
+
+    inline void from_json(const json& json_text, BranchRequest& request) {
+        request.branches = json_text.at("branches").get<std::vector<std::string>>();
+    }
+
+    inline void to_json(json& json_text, const BranchRequest& request) {
+        json_text = json::object();
+        json_text["branches"] = request.branches;
+    }
 
     inline void from_json(const json& json_text, Package& package) {
         package.name = json_text.at("name").get<std::string>();
