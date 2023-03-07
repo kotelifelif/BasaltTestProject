@@ -7,17 +7,15 @@ using json = nlohmann::json;
 
 int main(int argc, char* argv[])
 {
-	//constexpr size_t parameters_size = 3;
-	//if (argc != parameters_size)
-	//{
-	//	std::cout << "Incorrect size of parameters" << std::endl;
-	//	return 1;
-	//}
+	constexpr size_t parameters_size = 3;
+	if (argc != parameters_size)
+	{
+		std::cout << "Incorrect size of parameters" << std::endl;
+		return 1;
+	}
 
-	// "https://rdb.altlinux.org/api/export/branch_binary_packages/p10"
-	// "https://rdb.altlinux.org/api/export/branch_binary_packages/sisyphus"
-	request_library::Request first_request = request_library::get_request("p10");
-	request_library::Request second_request = request_library::get_request("sisyphus");
+	request_library::Request first_request = request_library::get_request(argv[0]);
+	request_library::Request second_request = request_library::get_request(argv[1]);
 
 	if (first_request.packages.empty() || second_request.packages.empty())
 	{
