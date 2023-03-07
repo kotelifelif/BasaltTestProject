@@ -5,15 +5,15 @@
 
 int main(int argc, char* argv[])
 {
-	constexpr size_t parameters_size = 3;
+	constexpr size_t parameters_size = 4;
 	if (argc != parameters_size)
 	{
 		std::cout << "Incorrect size of parameters" << std::endl;
 		return 1;
 	}
 
-	request_library::Request first_request = request_library::get_request(argv[0]);
-	request_library::Request second_request = request_library::get_request(argv[1]);
+	request_library::Request first_request = request_library::get_request(argv[1]);
+	request_library::Request second_request = request_library::get_request(argv[2]);
 
 	if (first_request.packages.empty() || second_request.packages.empty())
 	{
@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 	request_library::CompareBranchesStructure structure = generate_structure("p10", "sisyphus", elements_missing_in_the_first_responce,
 		elements_missing_in_the_second_responce, release_elements);
 
-	request_library::write_to_file(argv[2], structure);
+	request_library::write_to_file(argv[3], structure);
 
 	return 0;
 }
