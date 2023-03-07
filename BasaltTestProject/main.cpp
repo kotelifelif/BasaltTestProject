@@ -1,9 +1,7 @@
 ﻿#pragma once
-#include "request_library.h"
+#include "request_library/request_library.h"
 
 #include <iostream>
-
-using json = nlohmann::json;
 
 int main(int argc, char* argv[])
 {
