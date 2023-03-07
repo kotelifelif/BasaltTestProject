@@ -8,7 +8,7 @@ project ("BasaltTestProject")
 # Add source to this project's executable.
 add_subdirectory(cpr)
 add_subdirectory(json)
-add_executable (BasaltTestProject "main.cpp" "Request.h")
+add_executable (BasaltTestProject "main.cpp" "request_library.h" "request_library.cpp")
 target_link_libraries(BasaltTestProject PUBLIC pthread)
 target_link_libraries(BasaltTestProject PRIVATE nlohmann_json::nlohmann_json)
 target_link_libraries(BasaltTestProject PRIVATE cpr::cpr)
