@@ -1,0 +1,3 @@
+[submodule "BasaltTestProject/request_library/cpr"]
+	path = BasaltTestProject/request_library/cpr
+	url = https://github.com/libcpr/cpr
