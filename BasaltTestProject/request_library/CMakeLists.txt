@@ -7,7 +7,7 @@ project ("request_library")
 
 # Add source to this project's executable.
 add_subdirectory(cpr)
-add_subdirectory(json)
+find_package(nlohmann_json 3.2.0 REQUIRED)
 add_library(${PROJECT_NAME} SHARED
     request_library.cpp
     request_library.h
