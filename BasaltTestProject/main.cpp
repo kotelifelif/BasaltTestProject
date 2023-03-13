@@ -1,5 +1,4 @@
-﻿#pragma once
-#include "request_library/request_library.h"
+﻿#include "request_library/request_library.h"
 
 #include <iostream>
 

@@ -51,7 +51,7 @@ namespace request_library {
     }
 
     void from_json(const json& json_text, ArchRequest& request) {
-        request.archs = json_text["archs"];
+        request.archs = json_text.at("archs").get<std::vector<Arch>>();
         request.length = json_text["length"];
     }
 
