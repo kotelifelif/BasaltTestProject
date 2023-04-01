@@ -4,6 +4,7 @@
 cmake_minimum_required (VERSION 3.8)
 
 project ("BasaltTestProject")
+set (CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/bin)
 
 # Add source to this project's executable.
 add_subdirectory(request_library)
